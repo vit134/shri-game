@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Dungeon of Doom</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/app.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <!-- Thanks for assets to Kenny at http://kenney.nl/assets/platformer-pack-redux -->
+    <div class="app container">
+        <div class="level level_0"><div class="door door_locked door_level_0"></div></div>
+        <div class="level level_1"><div class="door door_locked door_disabled door_level_1"></div></div>
+        <div class="level level_2"><div class="door door_locked door_disabled door_level_2"></div></div>
+        <div class="level level_3"><div class="box box_locked door door_disabled door_level_3"></div></div>
+        <div class="level level_4"></div>
+
+        <div class="popup popup_hidden popup_level_0">
+            <div class="popup__content popup__content_level_0" touch-action="none">
+                <div class="popup__close">╳</div>
+                <div class="door-riddle">
+                    <div class="door-riddle__button door-riddle__button_0"></div>
+                    <div class="door-riddle__button door-riddle__button_1"></div>
+                    <div class="door-riddle__button door-riddle__button_2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="popup popup_hidden popup_level_1">
+            <div class="ba"></div>
+            <div class="popup__content popup__content_level_1" touch-action="none">
+                <div class="popup__close">╳</div>
+                <div class="door-riddle">
+                    <div class="door-riddle__inner">
+                        <div class="door-riddle__line door-riddle__line_horizontal">
+                            <div class="door-riddle__line__inner">
+                                <div class="door-riddle__button door-riddle__button_0"></div>
+                                <div class="door-riddle__icon door-riddle__icon_move-right move"></div>
+                                <div class="put"></div>
+                            </div>
+                        </div>
+                        <div class="door-riddle__container hidden">
+                            <div class="door-riddle__line door-riddle__line_vertical ">
+                                <div class="door-riddle__line__inner">
+                                    <div class="door-riddle__button door-riddle__button_multi door-riddle__button_1"></div>
+                                    <div class="door-riddle__icon door-riddle__icon_move-down move-down"></div>
+                                    <div class="put"></div>
+                                </div>
+                            </div>
+                            <div class="door-riddle__line door-riddle__line_vertical">
+                                <div class="door-riddle__line__inner revert">
+                                    <div class="door-riddle__button door-riddle__button_multi door-riddle__button_2 revert"></div>
+                                    <div class="door-riddle__icon door-riddle__icon_move-up move-up"></div>
+                                    <div class="put"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="popup popup_level_2">
+            <div class="popup__content popup__content_level_2" touch-action="none">
+                <div class="popup__close">╳</div>
+                <div class="door-riddle__timer">
+                    <div>Осталось </div>
+                    <span class="door-riddle__timer__text">10</span> сек
+                </div>
+                <div class="door-riddle">
+                    <div class="door-riddle__inner door-riddle__inner_flex">
+                        <div class="bg"><div class="start-button">START</div></div>
+                        <div class="door-riddle__inner__item"><div class="door-riddle__button door-riddle__button_multi"></div></div>
+                        <div class="door-riddle__inner__item"><div class="door-riddle__button door-riddle__button_multi"></div></div>
+                        <div class="door-riddle__inner__item"><div class="door-riddle__button door-riddle__button_multi"></div></div>
+                        <div class="door-riddle__inner__item"><div class="door-riddle__button door-riddle__button_multi"></div></div>
+                        <div class="door-riddle__inner__item"><div class="door-riddle__button door-riddle__button_multi"></div></div>
+                        <div class="door-riddle__inner__item"><div class="door-riddle__button door-riddle__button_multi"></div></div>
+                        <div class="door-riddle__inner__item"><div class="door-riddle__button door-riddle__button_multi"></div></div>
+                        <div class="door-riddle__inner__item"><div class="door-riddle__button door-riddle__button_multi"></div></div>
+                    </div>
+                </div>
+                <div class="put hidden"></div>
+            </div>
+        </div>
+        <div class="popup popup_hidden popup_level_3">
+            <div class="popup__content popup__content_level_3"  touch-action="none">
+                <div class="popup__close">╳</div>
+                <div class="door-riddle">
+                    <div class="door-riddle__circle" id="rotatable">
+                        <div class="door-riddle__button"></div>
+                        <div class="boom"><div class="boom__inner"></div></div>
+                        <div class="door-riddle__icon door-riddle__icon_rotate">
+                            <div class="door-riddle__icon__inner"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="interaction" style=""></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/pep/0.4.1/pep.js"></script>
+    <script src='js/zingtouch.min.js'></script>
+    <script src="js/doorBase.js"></script>
+    <script src="js/doorOthers.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
