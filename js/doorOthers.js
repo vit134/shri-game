@@ -140,7 +140,6 @@ function Door1(number, onUnlock) {
 
         if (m == 2) {
             if (chekPut(bPos, stopPoint)) {
-                multiIsFinished = true;
                 e.target.classList.add('door-riddle__button_check');
             } else {
                 multiUpdatePosition(e.target, e.pointerId)
@@ -153,9 +152,19 @@ function Door1(number, onUnlock) {
         e.target.classList.remove('door-riddle__button_pressed');
         e.target.classList.remove('selected');
 
-        if (!multiIsFinished){
-            _multiResetPositions();    
+
+        var allFinish = true;
+
+        this.popup.querySelectorAll('.door-riddle__button_multi').forEach(function(el) {
+            if (!el.classList.contains('door-riddle__button_check')) {
+                allFinish = false;
+            }
+        })
+
+        if (!allFinish){
+            _multiResetPositions.apply(this);   
         } else {
+            multiIsFinished = true;
             checkCondition.apply(this);
         }
     }
@@ -167,8 +176,11 @@ function Door1(number, onUnlock) {
     function _multiResetPositions() {
         positions = {};
 
-        buttons[1].style.transform = "translateY(" + 0 + "px)";
-        buttons[2].style.transform = "translateY(" + 0 + "px)";
+        this.popup.querySelectorAll('.door-riddle__button_multi').forEach(function(el) {
+            el.classList.remove('door-riddle__button_check');
+            el.style.transform = "translateY(" + 0 + "px)";
+        })
+
     }
 
     function multiUpdatePosition(el, id) {
@@ -238,7 +250,6 @@ function Door1(number, onUnlock) {
             }
         });
 
-        // Если все три кнопки зажаты одновременно, то откроем эту дверь
         if (isOpened) {
             this.unlock();
         }
