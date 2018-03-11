@@ -140,7 +140,6 @@ function Door1(number, onUnlock) {
 
         if (m == 2) {
             if (chekPut(bPos, stopPoint)) {
-                multiIsFinished = true;
                 e.target.classList.add('door-riddle__button_check');
             } else {
                 multiUpdatePosition(e.target, e.pointerId)
@@ -153,9 +152,19 @@ function Door1(number, onUnlock) {
         e.target.classList.remove('door-riddle__button_pressed');
         e.target.classList.remove('selected');
 
-        if (!multiIsFinished){
-            _multiResetPositions();    
+
+        var allFinish = true;
+
+        this.popup.querySelectorAll('.door-riddle__button_multi').forEach(function(el) {
+            if (!el.classList.contains('door-riddle__button_check')) {
+                allFinish = false;
+            }
+        })
+
+        if (!allFinish){
+            _multiResetPositions.apply(this);   
         } else {
+            multiIsFinished = true;
             checkCondition.apply(this);
         }
     }
@@ -167,8 +176,11 @@ function Door1(number, onUnlock) {
     function _multiResetPositions() {
         positions = {};
 
-        buttons[1].style.transform = "translateY(" + 0 + "px)";
-        buttons[2].style.transform = "translateY(" + 0 + "px)";
+        this.popup.querySelectorAll('.door-riddle__button_multi').forEach(function(el) {
+            el.classList.remove('door-riddle__button_check');
+            el.style.transform = "translateY(" + 0 + "px)";
+        })
+
     }
 
     function multiUpdatePosition(el, id) {
@@ -238,7 +250,6 @@ function Door1(number, onUnlock) {
             }
         });
 
-        // Если все три кнопки зажаты одновременно, то откроем эту дверь
         if (isOpened) {
             this.unlock();
         }
@@ -302,13 +313,18 @@ function Door2(number, onUnlock) {
         b.addEventListener('pointerup', _onButtonPointerUp.bind(this));
     }.bind(this));
 
+    var num = 10;
+
     function timer() {
         var time = document.querySelector('.door-riddle__timer__text');
-        var num = time.innerHTML;
+
+        time.innerHTML = num;
 
         var timerId = setTimeout(function tick() {
             if (num >= 0) {
                 time.innerHTML = num--;
+                timerId = setTimeout(tick, 1000);
+
             } else {
                 clearTimeout(timerId);
 
@@ -329,7 +345,6 @@ function Door2(number, onUnlock) {
 
             }
 
-            timerId = setTimeout(tick, 1000);
         }, 0);
 
     }
@@ -394,7 +409,7 @@ function Door2(number, onUnlock) {
         }
 
         this.popup.querySelectorAll('.door-riddle__button_multi').forEach(function(el) {
-            if (el.classList.contains('draging')) {
+            if (el.classList.contains('draging') && el.classList.contains('door-riddle__button_selected')) {
                 touchCount++;
             }
         })
@@ -463,6 +478,8 @@ function Door2(number, onUnlock) {
 
         this.popup.querySelectorAll('.door-riddle__button.draging').forEach(function(el) {
             el.classList.remove('draging');
+            el.classList.remove('door-riddle__button_check');
+            el.classList.remove('door-riddle__button_pressed');
             el.style.transform = "translate(0,0)";
         })
     }
