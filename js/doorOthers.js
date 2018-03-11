@@ -313,13 +313,18 @@ function Door2(number, onUnlock) {
         b.addEventListener('pointerup', _onButtonPointerUp.bind(this));
     }.bind(this));
 
+    var num = 10;
+
     function timer() {
         var time = document.querySelector('.door-riddle__timer__text');
-        var num = time.innerHTML;
+
+        time.innerHTML = num;
 
         var timerId = setTimeout(function tick() {
             if (num >= 0) {
                 time.innerHTML = num--;
+                timerId = setTimeout(tick, 1000);
+
             } else {
                 clearTimeout(timerId);
 
@@ -340,7 +345,6 @@ function Door2(number, onUnlock) {
 
             }
 
-            timerId = setTimeout(tick, 1000);
         }, 0);
 
     }
@@ -405,7 +409,7 @@ function Door2(number, onUnlock) {
         }
 
         this.popup.querySelectorAll('.door-riddle__button_multi').forEach(function(el) {
-            if (el.classList.contains('draging')) {
+            if (el.classList.contains('draging') && el.classList.contains('door-riddle__button_selected')) {
                 touchCount++;
             }
         })
@@ -474,6 +478,8 @@ function Door2(number, onUnlock) {
 
         this.popup.querySelectorAll('.door-riddle__button.draging').forEach(function(el) {
             el.classList.remove('draging');
+            el.classList.remove('door-riddle__button_check');
+            el.classList.remove('door-riddle__button_pressed');
             el.style.transform = "translate(0,0)";
         })
     }
