@@ -1,0 +1,59 @@
+<style>
+#cnvs {
+ width: 400px;
+ height: 400px;
+ border: 1px solid red;
+    background: url(http://tutorial.promo.net.ua/images/js/setka2.png);
+    }
+</style>
+<canvas id="cnvs" width="400px" height="400px"></canvas>
+<p>
+X<input id="pointX" type="text" size="4">
+Y<input id="pointY" type="text" size="4">
+<input type="button" value="Ok" onclick="ris_point ( document.getElementById('pointX').value,document.getElementById('pointY').value )">
+</p>
+<script>
+ rad = 150; // радиус окружности
+ sm_X = 200; // смещение центра окружности
+ sm_Y = 200; // смещение центра окружности
+
+ function ris_point(x,y) {
+  var canvas = document.getElementById('cnvs');
+  var ctx = canvas.getContext('2d');
+  ctx.lineWidth = 5; // толщина линии
+
+  // длина гипотенузы
+  var gip = Math.sqrt(Math.pow(y-200, 2)+Math.pow(x-200, 2));
+  var koeff = gip/rad;
+  //var cycle_x = 200+(x-200)/koeff;
+  //var cycle_y = 200+(y-200)/koeff;
+  var cycle_x = sm_X+(x-sm_X)/koeff;
+  var cycle_y = sm_Y+(y-sm_Y)/koeff;
+
+  console.log('x='+x+"\n"+'y='+y+"\n"+'gip='+gip+"\n"+'koeff='+koeff+"\n"+'cycle_x=x/koeff='+cycle_x+"\n"+'cycle_y=y/koeff='+cycle_y+"\n");
+
+  //------- рисую заданную точку
+  ctx.arc(x, y, 5, 0, 2*Math.PI, true);
+  ctx.moveTo( cycle_x, cycle_y );
+
+  //------- рисую точку на окружности
+  ctx.arc(cycle_x, cycle_y, 3, 0, 2*Math.PI, true);
+  ctx.stroke();
+ }
+
+/*
+ function ris_duga ( x,y, radius, startAngle, endAngle, anticlockwise ) {
+  var canvas = document.getElementById('cnvs');
+  var ctx = canvas.getContext('2d');
+
+  ctx.lineWidth = 5; // толщина линии
+
+  //ctx.arc(200,200,100,0, Math.PI,true);
+  ctx.arc(x,y,radius,startAngle, endAngle,true);
+  ctx.stroke();
+ }
+
+*/
+
+
+</script>
