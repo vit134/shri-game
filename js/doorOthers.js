@@ -16,7 +16,8 @@ function Door0(number, onUnlock) {
         circle = self.popup.querySelector('.door-circle'),
         button = self.popup.querySelector('.door-circle__button'),
         centerButton = self.popup.querySelector('.door-circle__center'),
-        checkPoint = self.popup.querySelectorAll('.door-circle__checkpiont');
+        checkPoint = self.popup.querySelectorAll('.door-circle__checkpiont'),
+        visibleChekpoint;
 
     var positions = {
         center: {
@@ -30,7 +31,10 @@ function Door0(number, onUnlock) {
 
     var isButton = false,
         isMoving = false,
-        centerPressed = false;
+        centerPressed = true,
+        fourth;
+
+    var checkPointPositions = [];
     
     var counter = self.popup.querySelector('.door-counter__count'),
         counterCount  = checkPoint.length;
@@ -38,29 +42,35 @@ function Door0(number, onUnlock) {
     function init() {
         bindEvents();
         updateCounter(counterCount);
+        getCheckpointPositions();
+        hideChekpoints(4);  
+        
+        updateCounter(getVisibleCheckPoint().length);
+
+        console.log(checkPointPositions);
     }
 
     function updateCounter(num) {
-        console.log(num);
         counter.dataset.count = num;
     }
 
     function bindEvents() {
-        area.addEventListener('pointerdown',  _onButtonPointerDown.bind(this));
-        area.addEventListener('pointermove',  _onButtonPointerMove.bind(this));
-        area.addEventListener('pointerup',  _onButtonPointerUp.bind(this));
-        area.addEventListener('pointerout',  _onButtonPointerOut.bind(this));
-        area.addEventListener('pointerleave',  _onButtonPointerLeave.bind(this));
+        button.addEventListener('pointerdown',  _onButtonPointerDown.bind(this));
+        button.addEventListener('pointermove',  _onButtonPointerMove.bind(this));
+        button.addEventListener('pointerup',  _onButtonPointerUp.bind(this));
+        button.addEventListener('pointerout',  _onButtonPointerOut.bind(this));
+        //button.addEventListener('pointerleave',  _onButtonPointerLeave.bind(this));
     }
     
     
     function _onButtonPointerDown(e) {
         e.target.releasePointerCapture(e.pointerId);
+        console.log(e);
         positions.current = positions.start = {
             x: button.getBoundingClientRect().left + (button.offsetWidth / 2),
             y: button.getBoundingClientRect().top + (button.offsetHeight / 2)
         }
-
+        
         if (e.target == button) {
             isButton = true;
             e.target.classList.add('pressed')
@@ -75,26 +85,102 @@ function Door0(number, onUnlock) {
         if (isButton && centerPressed) {
             isMoving = true;
             ris_point(e.pageX,e.pageY)
+
+            checkChekPoint(e.pageX,e.pageY);
+
         }
     }
 
     function _onButtonPointerUp(e) {
-        isButton = false;
+       /* isButton = false;
         isMoving = false;
         button.classList.remove('pressed')
+        
         if (counterCount != 0) {
 
-        }
+        }*/
     }
 
     function _onButtonPointerOut(e) {
-        if (e.toElement.classList.contains('door-circle__checkpiont')) {
+        console.log('out');
+
+        resetPosition();
+
+        /*if (e.toElement.classList.contains('door-circle__checkpiont') || e.toElement.classList.contains('door-circle__button')) {
             e.target.classList.add('checked')
 
             updateCounter(--counterCount);
 
             checkFinal.apply(this);
+        } else {
+            isButton = false;
+            isMoving = false;
+            centerPressed = false;
+
+            resetPosition()
+        }*/
+
+    }
+
+    /*function createFallCheckpoint() {
+        switch (fourth) {
+            case: 1
+
+                break
         }
+    }*/
+
+    function checkChekPoint(x,y) {
+        checkPointPositions.forEach(function (el) {
+            if (el.left <= x && el.right >= x && el.top <= y && el.bottom >= y) {
+                el.el.classList.add('hidden');
+
+            }
+        })
+    }
+
+    function getVisibleCheckPoint() {
+        return visibleChekpoint = Array.from(checkPoint).filter(el => {
+            return !el.classList.contains('hidden');
+        })
+    }
+
+    function getCheckpointPositions() {
+        checkPoint.forEach(function (el) {
+            var pos = el.getBoundingClientRect();
+            checkPointPositions.push({
+                el: el,
+                left: pos.left,
+                right: pos.right,
+                top: pos.top,
+                bottom: pos.bottom
+            });
+        })
+    }
+
+    function hideChekpoints(count) {
+        var freeCheckpoint = [];
+        checkPoint.forEach(function(el) {
+            if (!el.classList.contains('busy')) {
+                freeCheckpoint.push(el);
+            }
+        })
+
+        var needRand = [];
+
+        if (freeCheckpoint.length == 0) return;
+
+        while (needRand.length < count) {
+            var rand = Math.floor(Math.random() * freeCheckpoint.length);
+            if (needRand.indexOf(rand) == -1) {
+                needRand.push(rand);
+            }
+        }
+
+        needRand.forEach(function(i) {
+            freeCheckpoint[i].classList.add('hidden');
+            //wasSelected.push(freeButton[i]);
+        })
     }
 
     function checkFinal() {
@@ -124,6 +210,13 @@ function Door0(number, onUnlock) {
         })
     }
 
+    function resetPosition() {
+        positions.current = positions.start = {};
+        console.log('res pos', positions.current);
+        button.style.transform = "translate(" + 0 + "px, "+ 0 +"px)";
+        button.classList.remove('pressed')
+    }
+
     function ris_point(x,y) {
         rad = positions.R; // радиус окружности
         sm_X = positions.center.x; // смещение центра окружности
@@ -138,8 +231,9 @@ function Door0(number, onUnlock) {
 
         positions.current = {x: cycle_x, y: cycle_y};
 
-        updatePosition()
+        fourth = getFourth(cycle_x,cycle_y);
 
+        updatePosition()
     }
 
     function createPoint(x, y) {
@@ -175,13 +269,13 @@ function Door0(number, onUnlock) {
         var fourth;
         var center = positions.center;
 
-        if (x > center.x && y < center.y) {
+        if (x >= center.x && y <= center.y) {
             fourth = 1;
-        } else if (x > center.x && y > center.y) {
+        } else if (x >= center.x && y >= center.y) {
             fourth = 2;
-        } else if (x < center.x && y > center.y) {
+        } else if (x <= center.x && y >= center.y) {
             fourth = 3;
-        } else {
+        } else if (x <= center.x && y<= center.y) {
             fourth = 4;
         }
 
