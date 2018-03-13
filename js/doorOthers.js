@@ -10,25 +10,146 @@
 function Door0(number, onUnlock) {
     DoorBase.apply(this, arguments);
 
-    var area = this.popup.querySelector('.door-riddle'),
-        circle = this.popup.querySelector('.door-circle');
+    var self = this;
+
+    var area = self.popup.querySelector('.door-riddle'),
+        circle = self.popup.querySelector('.door-circle'),
+        button = self.popup.querySelector('.door-circle__button'),
+        centerButton = self.popup.querySelector('.door-circle__center'),
+        checkPoint = self.popup.querySelectorAll('.door-circle__checkpiont');
 
     var positions = {
         center: {
             y: circle.getBoundingClientRect().top + circle.offsetHeight / 2,
             x: circle.getBoundingClientRect().left + circle.offsetWidth / 2
         },
+        start: {x: 0,y:0},
+        current: {x: 0, y: 0},
         R: circle.offsetWidth / 2
     }
 
+    var isButton = false,
+        isMoving = false,
+        centerPressed = false;
+    
+    var counter = self.popup.querySelector('.door-counter__count'),
+        counterCount  = checkPoint.length;
+    
+    function init() {
+        bindEvents();
+        updateCounter(counterCount);
+    }
+
+    function updateCounter(num) {
+        console.log(num);
+        counter.dataset.count = num;
+    }
+
+    function bindEvents() {
+        area.addEventListener('pointerdown',  _onButtonPointerDown.bind(this));
+        area.addEventListener('pointermove',  _onButtonPointerMove.bind(this));
+        area.addEventListener('pointerup',  _onButtonPointerUp.bind(this));
+        area.addEventListener('pointerout',  _onButtonPointerOut.bind(this));
+        area.addEventListener('pointerleave',  _onButtonPointerLeave.bind(this));
+    }
+    
+    
+    function _onButtonPointerDown(e) {
+        e.target.releasePointerCapture(e.pointerId);
+        positions.current = positions.start = {
+            x: button.getBoundingClientRect().left + (button.offsetWidth / 2),
+            y: button.getBoundingClientRect().top + (button.offsetHeight / 2)
+        }
+
+        if (e.target == button) {
+            isButton = true;
+            e.target.classList.add('pressed')
+        }
+
+        if (e.target == centerButton) {
+            centerPressed = true;
+        }
+    }
+
+    function _onButtonPointerMove(e) {
+        if (isButton && centerPressed) {
+            isMoving = true;
+            ris_point(e.pageX,e.pageY)
+        }
+    }
+
+    function _onButtonPointerUp(e) {
+        isButton = false;
+        isMoving = false;
+        button.classList.remove('pressed')
+        if (counterCount != 0) {
+
+        }
+    }
+
+    function _onButtonPointerOut(e) {
+        if (e.toElement.classList.contains('door-circle__checkpiont')) {
+            e.target.classList.add('checked')
+
+            updateCounter(--counterCount);
+
+            checkFinal.apply(this);
+        }
+    }
+
+    function checkFinal() {
+        var finish = true;
+        checkPoint.forEach(function (el) {
+            if (!el.classList.contains('checked')) {
+                finish = false;
+            }
+        })
+        
+        if (finish) {
+            console.log('unlock');
+            self.unlock();
+        }
+    }
+
+    function _onButtonPointerLeave(e) {
+        console.log('area leave', e);
+    }
+
+    function updatePosition() {
+        requestAnimationFrame(function() {
+            var diffX = positions.current.x - positions.start.x,
+                diffY = positions.current.y - positions.start.y;
+
+            button.style.transform = "translate(" + diffX + "px, "+ diffY +"px)";
+        })
+    }
+
+    function ris_point(x,y) {
+        rad = positions.R; // радиус окружности
+        sm_X = positions.center.x; // смещение центра окружности
+        sm_Y = positions.center.y; // смещение центра окружности
+
+        // длина гипотенузы
+        var gip = Math.sqrt(Math.pow(y-sm_Y, 2)+Math.pow(x-sm_X, 2));
+        var koeff = gip/rad;
+
+        var cycle_x = sm_X+(x-sm_X)/koeff;
+        var cycle_y = sm_Y+(y-sm_Y)/koeff;
+
+        positions.current = {x: cycle_x, y: cycle_y};
+
+        updatePosition()
+
+    }
+
     function createPoint(x, y) {
-        var point = document.querySelector('.door-point') || document.createElement('div');
+        var point = self.popup.querySelector('.door-point') || document.createElement('div');
         point.classList.add('door-point');
-        point.style.left = x - 10 + 'px';
-        point.style.top = y - 10 + 'px';
+        point.style.left = x - 20 + 'px';
+        point.style.top = y - 20 + 'px';
 
         area.appendChild(point);
-        createSvg(x, y)
+        //createSvg(x, y)
     }
 
     function createSvg(x,y) {
@@ -67,141 +188,8 @@ function Door0(number, onUnlock) {
         return fourth;
     }
 
-    /*function ris_point(x,y) {
-        rad = positions.R; // радиус окружности
-        sm_X = positions.center.x; // смещение центра окружности
-        sm_Y = positions.center.y; // смещение центра окружности
 
-        // длина гипотенузы
-        var gip = Math.sqrt(Math.pow(y-sm_Y, 2)+Math.pow(x-sm_X, 2));
-        var koeff = gip/rad;
-        var cycle_x = sm_X+(x-sm_X)/koeff;
-        var cycle_y = sm_Y+(y-sm_Y)/koeff;
-
-        //console.log('x='+x+"\n"+'y='+y+"\n"+'gip='+gip+"\n"+'koeff='+koeff+"\n"+'cycle_x=x/koeff='+cycle_x+"\n"+'cycle_y=y/koeff='+cycle_y+"\n");
-
-        document.querySelector('.door-circle__button').style.left = cycle_x - 10 + 'px';
-        document.querySelector('.door-circle__button').style.top = cycle_y - 10 + 'px';
-    }*/
-
-    /*function getPoint(x,y) {
-        var fourth = getFourth(x,y);
-        
-        console.log(x,y, positions.center);
-        
-        var x1 = positions.center.x;
-        var y1 = positions.center.y;
-        
-        switch (fourth) {
-            case 1:
-                /!*var catA = Math.abs(y - positions.center.y);
-                
-                console.log(catA);*!/
-
-                
-                
-                break
-            case 2:
-                break
-            case 3:
-                break
-            case 4:
-                break
-        }
-
-
-
-
-        /!*var centerX = positions.center.x,
-            centerY = positions.center.y,
-            R = positions.R;
-
-
-        var catA = centerY - y,
-            catB = centerX - x,
-            C = Math.sqrt(Math.pow(catA, 2) + Math.pow(catB, 2));
-        /!*var angleA = Math.atan2(y,x)*!/
-
-
-        var x1 = positions.center.x,
-            y1 = positions.center.y,
-            x2 = x,
-            y2 = y;
-
-        var k = (y2 - y1)/(x2 - x1),
-            b = y1 - k * x1;
-
-        var Y = k*x + b
-
-        console.log("x1:" + x1 + " y1:" + y1 + " x2:" + x2 + " y2:" + y2 + ' R: ' + R);*!/
-
-
-
-        createSvg(x,y);
-        //console.log(Math.atan( (Y * 180) / Math.PI ));
-
-    }*/
-
-    function _onButtonPointerDown(e) {
-        e.target.setPointerCapture(e.pointerId);
-        console.log(e.pageX, e.pageY);
-
-        createPoint(e.pageX, e.pageY);
-
-        //getPoint(e.pageX,e.pageY)
-
-        //ris_point(e.pageX,e.pageY)
-    }
-    
-    function _onButtonPointerMove(e) {
-        //console.log(e.target);
-
-        //ris_point(e.pageX,e.pageY)
-    }
-
-    area.addEventListener('pointerdown',  _onButtonPointerDown.bind(this));
-    area.addEventListener('pointermove',  _onButtonPointerMove.bind(this));
-    
-    
-
-    /*var buttons = [
-        this.popup.querySelector('.door-riddle__button_0'),
-        this.popup.querySelector('.door-riddle__button_1'),
-        this.popup.querySelector('.door-riddle__button_2')
-    ];
-
-    buttons.forEach(function(b) {
-        b.addEventListener('pointerdown', _onButtonPointerDown.bind(this));
-        b.addEventListener('pointerup', _onButtonPointerUp.bind(this));
-        b.addEventListener('pointercancel', _onButtonPointerUp.bind(this));
-        b.addEventListener('pointerleave', _onButtonPointerUp.bind(this));
-    }.bind(this));
-
-    function _onButtonPointerDown(e) {
-        e.target.classList.add('door-riddle__button_pressed');
-        checkCondition.apply(this);
-    }
-
-    function _onButtonPointerUp(e) {
-        e.target.classList.remove('door-riddle__button_pressed');
-    }
-
-    /!**
-     * Проверяем, можно ли теперь открыть дверь
-     *!/
-    function checkCondition() {
-        var isOpened = true;
-        buttons.forEach(function(b) {
-            if (!b.classList.contains('door-riddle__button_pressed')) {
-                isOpened = false;
-            }
-        });
-
-        // Если все три кнопки зажаты одновременно, то откроем эту дверь
-        if (isOpened) {
-            this.unlock();
-        }
-    }*/
+    init();
 }
 
 // Наследуемся от класса DoorBase

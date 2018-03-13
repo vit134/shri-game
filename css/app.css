@@ -509,30 +509,67 @@ body {
   }
 }
 
+.door-counter {
+    position: absolute;
+    top; 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+}
 
-.door-riddle {
-    position: relative;
+.door-counter__coin {
+    width: 30px;
+    height: 30px;
+    background: url('../img/hudCoin.png') center no-repeat;
+    background-size: 100%;
+}
+
+.door-counter__count {
+    width: 20px;
+    height: 30px;
+    background-size: 30px 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.door-counter__count[data-count="0"] {
+    background-image: url('../img/hud0.png');
+}
+
+.door-counter__count[data-count="1"] {
+    background-image: url('../img/hud1.png');
+}
+.door-counter__count[data-count="2"] {
+    background-image: url('../img/hud2.png');
+}
+.door-counter__count[data-count="3"] {
+    background-image: url('../img/hud3.png');
 }
 
 .door-circle {
+    position: relative;
     width: 280px;
     height: 280px;
-    border: 2px solid red;
+    border: 2px dashed #a0653b;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    //position: relative;
 }
 
 .door-circle__center {
-    width:20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: red;
-    box-shadow: 0px 0px 5px #eee;
+    background-color: #583319;
+    border: 1px solid #F3E9E0;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, .4);
+    transition: background-color .3s;
 }
 
 .door-point {
@@ -544,41 +581,47 @@ body {
 }
 
 .door-circle__button {
-    width:20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: yellow;
+    background-color: #583319;
+    border: 1px solid #F3E9E0;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, .4);
+    transition: background-color .3s;
     position: absolute;
-    top: -10px;
+    top: -20px;
     left: 50%;
-    margin-left: -10px;
+    margin-left: -20px;
 }
 
-svg {
-    position: absolute;
+.door-circle__button.pressed {
+    background-color: #F3E9E0;
 }
 
-.xy {
+.door-circle__checkpiont {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: url('../img/coinGold.png') center no-repeat;
+    background-size: 100%;
 }
 
-.xy__x {
-    position: absolute;
-    top: 333.5px;
-    height: 1px;
-    width: 100%;
-    background: green;
+.door-circle__checkpiont_0 {
+    top: calc(50% - 20px);
+    left: calc(100% - 20px);
 }
 
-.xy__y {
-    position: absolute;
-    top: 0;
-    left: 187.5px;
-    height: 100%;
-    width: 1px;
-    background: green;
+.door-circle__checkpiont_1 {
+    top: calc(100% - 20px);
+    left: calc(50% - 20px);
+}
+
+.door-circle__checkpiont_2 {
+    top: calc(50% - 20px);
+    left: calc(0% - 20px);
+}
+
+.door-circle__checkpiont.checked {
+    display: none;
 }
