@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="55613302-1f34-4278-b85e-7057712ed319" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/app.css" afterPath="$PROJECT_DIR$/css/app.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/doorOthers.js" afterPath="$PROJECT_DIR$/js/doorOthers.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -30,11 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="doorOthers.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="doorOthers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/doorOthers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="46" column="8" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+            <state relative-caret-position="359">
+              <caret line="130" column="61" lean-forward="false" selection-start-line="130" selection-start-column="61" selection-end-line="130" selection-end-column="61" />
               <folding>
                 <element signature="n#!!block;n#_onButtonPointerDown#0;n#!!block;n#Door0#0" expanded="false" />
                 <element signature="n#!!block;n#_onButtonPointerMove#0;n#!!block;n#Door0#0" expanded="false" />
@@ -46,6 +45,16 @@
                 <element signature="n#!!block;n#createSvg#0;n#!!block;n#Door0#0" expanded="false" />
                 <element signature="n#!!block;n#getFourth#0;n#!!block;n#Door0#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="6" lean-forward="true" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -109,6 +118,7 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/css/app.css" />
         <option value="$PROJECT_DIR$/js/doorOthers.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -187,12 +197,12 @@
       <option name="presentableId" value="Default" />
       <updated>1520781923284</updated>
       <workItem from="1520781924647" duration="608000" />
-      <workItem from="1520844220708" duration="33327000" />
+      <workItem from="1520844220708" duration="33560000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33935000" />
+    <option name="totallyTimeSpent" value="34168000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -265,8 +275,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/doorOthers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="46" column="8" lean-forward="false" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+        <state relative-caret-position="359">
+          <caret line="130" column="61" lean-forward="false" selection-start-line="130" selection-start-column="61" selection-end-line="130" selection-end-column="61" />
           <folding>
             <element signature="n#!!block;n#_onButtonPointerDown#0;n#!!block;n#Door0#0" expanded="false" />
             <element signature="n#!!block;n#_onButtonPointerMove#0;n#!!block;n#Door0#0" expanded="false" />
@@ -278,6 +288,14 @@
             <element signature="n#!!block;n#createSvg#0;n#!!block;n#Door0#0" expanded="false" />
             <element signature="n#!!block;n#getFourth#0;n#!!block;n#Door0#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="6" lean-forward="true" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
+          <folding />
         </state>
       </provider>
     </entry>

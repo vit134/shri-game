@@ -44,7 +44,7 @@ function Door0(number, onUnlock) {
         updateCounter(counterCount);
         getCheckpointPositions();
         hideChekpoints(4);  
-        
+
         updateCounter(getVisibleCheckPoint().length);
 
         console.log(checkPointPositions);
@@ -122,18 +122,13 @@ function Door0(number, onUnlock) {
 
     }
 
-    /*function createFallCheckpoint() {
-        switch (fourth) {
-            case: 1
-
-                break
-        }
-    }*/
 
     function checkChekPoint(x,y) {
         checkPointPositions.forEach(function (el) {
             if (el.left <= x && el.right >= x && el.top <= y && el.bottom >= y) {
                 el.el.classList.add('hidden');
+
+                updateCounter(getVisibleCheckPoint().length);
 
             }
         })
