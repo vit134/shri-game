@@ -17,7 +17,8 @@ function Door0(number, onUnlock) {
         button = self.popup.querySelector('.door-circle__button'),
         centerButton = self.popup.querySelector('.door-circle__center'),
         checkPoint = self.popup.querySelectorAll('.door-circle__checkpiont'),
-        visibleChekpoint;
+        visibleChekpoint,
+        hiddenCheckpoint;
 
     var positions = {
         center: {
@@ -42,8 +43,10 @@ function Door0(number, onUnlock) {
     function init() {
         bindEvents();
         updateCounter(counterCount);
+        hideChekpoints(4);
+
         getCheckpointPositions();
-        hideChekpoints(4);  
+
 
         updateCounter(getVisibleCheckPoint().length);
 
@@ -106,6 +109,22 @@ function Door0(number, onUnlock) {
 
         resetPosition();
 
+        getHiddenCheckpoint()
+
+        if (hiddenCheckpoint.length == checkPoint.length) {
+
+            //функция открытия завершающего попапа
+            self.unlock();
+            return
+        }
+
+        var rand = 0 - 0.5 + Math.random() * (hiddenCheckpoint.length -1 - 0 + 1)
+        rand = Math.round(rand);
+
+        hiddenCheckpoint[rand].classList.remove('hidden');
+        updateCounter(getVisibleCheckPoint().length);
+
+        getCheckpointPositions();
         /*if (e.toElement.classList.contains('door-circle__checkpiont') || e.toElement.classList.contains('door-circle__button')) {
             e.target.classList.add('checked')
 
@@ -126,12 +145,12 @@ function Door0(number, onUnlock) {
     function checkChekPoint(x,y) {
         checkPointPositions.forEach(function (el) {
             if (el.left <= x && el.right >= x && el.top <= y && el.bottom >= y) {
-                el.el.classList.add('hidden');
+                el.el.classList.add('hidden', 'checked');
 
                 updateCounter(getVisibleCheckPoint().length);
-
             }
         })
+
     }
 
     function getVisibleCheckPoint() {
@@ -140,16 +159,24 @@ function Door0(number, onUnlock) {
         })
     }
 
+    function getHiddenCheckpoint() {
+        return hiddenCheckpoint = Array.from(checkPoint).filter(el => {
+            return el.classList.contains('hidden');
+    })
+    }
+
     function getCheckpointPositions() {
         checkPoint.forEach(function (el) {
-            var pos = el.getBoundingClientRect();
-            checkPointPositions.push({
-                el: el,
-                left: pos.left,
-                right: pos.right,
-                top: pos.top,
-                bottom: pos.bottom
-            });
+            if (!el.classList.contains('hidden')) {
+                var pos = el.getBoundingClientRect();
+                checkPointPositions.push({
+                    el: el,
+                    left: pos.left,
+                    right: pos.right,
+                    top: pos.top,
+                    bottom: pos.bottom
+                });
+            }
         })
     }
 
@@ -176,6 +203,10 @@ function Door0(number, onUnlock) {
             freeCheckpoint[i].classList.add('hidden');
             //wasSelected.push(freeButton[i]);
         })
+    }
+
+    function openCheckpoints() {
+
     }
 
     function checkFinal() {

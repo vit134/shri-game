@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="55613302-1f34-4278-b85e-7057712ed319" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/app.css" afterPath="$PROJECT_DIR$/css/app.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/doorOthers.js" afterPath="$PROJECT_DIR$/js/doorOthers.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -21,7 +21,7 @@
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+              <caret line="15" column="39" lean-forward="false" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
               <folding>
                 <element signature="n#style#0;n#div#2;n#div#0;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -32,13 +32,13 @@
       <file leaf-file-name="doorOthers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/doorOthers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="130" column="61" lean-forward="false" selection-start-line="130" selection-start-column="61" selection-end-line="130" selection-end-column="61" />
+            <state relative-caret-position="298">
+              <caret line="116" column="26" lean-forward="false" selection-start-line="116" selection-start-column="26" selection-end-line="116" selection-end-column="26" />
               <folding>
                 <element signature="n#!!block;n#_onButtonPointerDown#0;n#!!block;n#Door0#0" expanded="false" />
                 <element signature="n#!!block;n#_onButtonPointerMove#0;n#!!block;n#Door0#0" expanded="false" />
                 <element signature="n#!!block;n#_onButtonPointerUp#0;n#!!block;n#Door0#0" expanded="false" />
-                <element signature="n#!!block;n#_onButtonPointerOut#0;n#!!block;n#Door0#0" expanded="false" />
+                <element signature="n#!!block;n#hideChekpoints#0;n#!!block;n#Door0#0" expanded="false" />
                 <element signature="n#!!block;n#updatePosition#0;n#!!block;n#Door0#0" expanded="false" />
                 <element signature="n#!!block;n#resetPosition#0;n#!!block;n#Door0#0" expanded="false" />
                 <element signature="n#!!block;n#createPoint#0;n#!!block;n#Door0#0" expanded="false" />
@@ -53,7 +53,7 @@
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
-              <caret line="0" column="6" lean-forward="true" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
+              <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -63,7 +63,7 @@
         <entry file="file://$PROJECT_DIR$/bla.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="17" column="42" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="17" selection-end-column="42" />
+              <caret line="17" column="42" lean-forward="false" selection-start-line="15" selection-start-column="1" selection-end-line="17" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -72,8 +72,8 @@
       <file leaf-file-name="app.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/app.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="443">
-              <caret line="634" column="18" lean-forward="true" selection-start-line="634" selection-start-column="18" selection-end-line="634" selection-end-column="18" />
+            <state relative-caret-position="137">
+              <caret line="626" column="17" lean-forward="false" selection-start-line="626" selection-start-column="17" selection-end-line="626" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -96,13 +96,16 @@
       <find>__inner</find>
       <find>updateCounter</find>
       <find>case</find>
-      <find>door-riddle__inner_flex</find>
       <find>getRandomButton</find>
       <find>needRand</find>
       <find>wasSelected</find>
       <find>getCheckpointPositions</find>
       <find>checkChekPoint</find>
       <find>hideChekpoints</find>
+      <find>hidden</find>
+      <find>getHiddenCheckpoint</find>
+      <find>getVisibleCheckPoint</find>
+      <find>door-riddle__inner_flex</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -116,9 +119,9 @@
       <list>
         <option value="$PROJECT_DIR$/js/bla.html" />
         <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/css/app.css" />
-        <option value="$PROJECT_DIR$/js/doorOthers.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/js/doorOthers.js" />
+        <option value="$PROJECT_DIR$/css/app.css" />
       </list>
     </option>
   </component>
@@ -197,12 +200,12 @@
       <option name="presentableId" value="Default" />
       <updated>1520781923284</updated>
       <workItem from="1520781924647" duration="608000" />
-      <workItem from="1520844220708" duration="33560000" />
+      <workItem from="1520844220708" duration="35804000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34168000" />
+    <option name="totallyTimeSpent" value="36412000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -250,15 +253,7 @@
     <entry file="file://$PROJECT_DIR$/bla.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="17" column="42" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="17" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/app.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="443">
-          <caret line="634" column="18" lean-forward="true" selection-start-line="634" selection-start-column="18" selection-end-line="634" selection-end-column="18" />
+          <caret line="17" column="42" lean-forward="false" selection-start-line="15" selection-start-column="1" selection-end-line="17" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -266,7 +261,7 @@
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="15" column="39" lean-forward="true" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+          <caret line="15" column="39" lean-forward="false" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
           <folding>
             <element signature="n#style#0;n#div#2;n#div#0;n#div#5;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
@@ -275,13 +270,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/doorOthers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="130" column="61" lean-forward="false" selection-start-line="130" selection-start-column="61" selection-end-line="130" selection-end-column="61" />
+        <state relative-caret-position="298">
+          <caret line="116" column="26" lean-forward="false" selection-start-line="116" selection-start-column="26" selection-end-line="116" selection-end-column="26" />
           <folding>
             <element signature="n#!!block;n#_onButtonPointerDown#0;n#!!block;n#Door0#0" expanded="false" />
             <element signature="n#!!block;n#_onButtonPointerMove#0;n#!!block;n#Door0#0" expanded="false" />
             <element signature="n#!!block;n#_onButtonPointerUp#0;n#!!block;n#Door0#0" expanded="false" />
-            <element signature="n#!!block;n#_onButtonPointerOut#0;n#!!block;n#Door0#0" expanded="false" />
+            <element signature="n#!!block;n#hideChekpoints#0;n#!!block;n#Door0#0" expanded="false" />
             <element signature="n#!!block;n#updatePosition#0;n#!!block;n#Door0#0" expanded="false" />
             <element signature="n#!!block;n#resetPosition#0;n#!!block;n#Door0#0" expanded="false" />
             <element signature="n#!!block;n#createPoint#0;n#!!block;n#Door0#0" expanded="false" />
@@ -291,10 +286,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="626" column="17" lean-forward="false" selection-start-line="626" selection-start-column="17" selection-end-line="626" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="6" lean-forward="true" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
+          <caret line="0" column="6" lean-forward="false" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
           <folding />
         </state>
       </provider>

@@ -625,8 +625,6 @@ body {
     position: absolute;
     width: 40px;
     height: 40px;
-    //border-radius: 50%;
-    border: 1px solid red;
     background: url('../img/coinGold.png') center no-repeat;
     background-size: 100%;
 }
@@ -669,8 +667,4 @@ body {
 .door-circle__checkpiont_6 {
     top: calc(13% - 20px);
     right: calc(84% - 20px);
-}
-
-.door-circle__checkpiont.checked {
-    display: none;
 }
