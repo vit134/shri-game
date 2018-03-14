@@ -44,13 +44,9 @@ function Door0(number, onUnlock) {
         bindEvents();
         updateCounter(counterCount);
         hideChekpoints(4);
-
         getCheckpointPositions();
-
-
         updateCounter(getVisibleCheckPoint().length);
 
-        console.log(checkPointPositions);
     }
 
     function updateCounter(num) {
@@ -62,10 +58,14 @@ function Door0(number, onUnlock) {
         button.addEventListener('pointermove',  _onButtonPointerMove.bind(this));
         button.addEventListener('pointerup',  _onButtonPointerUp.bind(this));
         button.addEventListener('pointerout',  _onButtonPointerOut.bind(this));
-        //button.addEventListener('pointerleave',  _onButtonPointerLeave.bind(this));
+
+        document.querySelector('.popup__congratulations__button').addEventListener('click', _unlock);
     }
-    
-    
+
+    function _unlock() {
+        self.unlock();
+    }
+
     function _onButtonPointerDown(e) {
         e.target.releasePointerCapture(e.pointerId);
         console.log(e);
@@ -113,8 +113,7 @@ function Door0(number, onUnlock) {
 
         if (hiddenCheckpoint.length == checkPoint.length) {
 
-            //функция открытия завершающего попапа
-            self.unlock();
+            self.showCongratulations()
             return
         }
 
@@ -125,32 +124,15 @@ function Door0(number, onUnlock) {
         updateCounter(getVisibleCheckPoint().length);
 
         getCheckpointPositions();
-        /*if (e.toElement.classList.contains('door-circle__checkpiont') || e.toElement.classList.contains('door-circle__button')) {
-            e.target.classList.add('checked')
-
-            updateCounter(--counterCount);
-
-            checkFinal.apply(this);
-        } else {
-            isButton = false;
-            isMoving = false;
-            centerPressed = false;
-
-            resetPosition()
-        }*/
-
     }
-
 
     function checkChekPoint(x,y) {
         checkPointPositions.forEach(function (el) {
             if (el.left <= x && el.right >= x && el.top <= y && el.bottom >= y) {
                 el.el.classList.add('hidden', 'checked');
-
                 updateCounter(getVisibleCheckPoint().length);
             }
         })
-
     }
 
     function getVisibleCheckPoint() {
@@ -162,7 +144,7 @@ function Door0(number, onUnlock) {
     function getHiddenCheckpoint() {
         return hiddenCheckpoint = Array.from(checkPoint).filter(el => {
             return el.classList.contains('hidden');
-    })
+        })
     }
 
     function getCheckpointPositions() {
@@ -203,28 +185,6 @@ function Door0(number, onUnlock) {
             freeCheckpoint[i].classList.add('hidden');
             //wasSelected.push(freeButton[i]);
         })
-    }
-
-    function openCheckpoints() {
-
-    }
-
-    function checkFinal() {
-        var finish = true;
-        checkPoint.forEach(function (el) {
-            if (!el.classList.contains('checked')) {
-                finish = false;
-            }
-        })
-        
-        if (finish) {
-            console.log('unlock');
-            self.unlock();
-        }
-    }
-
-    function _onButtonPointerLeave(e) {
-        console.log('area leave', e);
     }
 
     function updatePosition() {
@@ -308,7 +268,6 @@ function Door0(number, onUnlock) {
         return fourth;
     }
 
-
     init();
 }
 
@@ -383,6 +342,7 @@ function Door1(number, onUnlock) {
     }
 
     function _multiTouchPointerMove(e) {
+        var t = e._target;
         var stopPoint = e.target.parentElement.querySelector('.put').getBoundingClientRect();
         var bPos = e.target.getBoundingClientRect();
 
@@ -399,6 +359,7 @@ function Door1(number, onUnlock) {
         this.popup.querySelectorAll('.door-riddle__icon').forEach(function(el) {
             el.classList.add('hidden');
         })
+
 
         if (m == 2) {
             if (chekPut(bPos, stopPoint)) {
@@ -477,6 +438,7 @@ function Door1(number, onUnlock) {
     }
 
     function _onButtonPointerMove(e) {
+        var t = e.target;
         var stopPoint = e.target.parentElement.querySelector('.put').getBoundingClientRect();
         var bPos = e.target.getBoundingClientRect();
 
@@ -485,6 +447,7 @@ function Door1(number, onUnlock) {
         }
 
         currentPosition = e.pageX;
+
 
         if (!chekPut(bPos, stopPoint)) {
             updatePosition(e.target);

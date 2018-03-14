@@ -10,11 +10,15 @@ function DoorBase(number, onUnlock) {
 
     this.level = document.querySelector('.level_' + number);
     this.door = document.querySelector('.door_level_' + number);
+    this.next = document.querySelector('.popup__congratulations__button');
     this.popup = document.querySelector('.popup_level_' + number);
     this.close = this.popup.querySelector('.popup__close');
 
     this.isLocked = true;
     this.isDisabled = this.door.classList.contains('door_disabled');
+
+    this.timer = 0;
+    this.timerId;
 
     this.door.addEventListener('click', onDoorClick.bind(this));
     this.close.addEventListener('click', onCloseClick.bind(this));
@@ -22,12 +26,14 @@ function DoorBase(number, onUnlock) {
     function onDoorClick() {
         if (!this.isDisabled) {
             this.openPopup();
+            this.startTimer.apply(this);
         }
     }
 
     function onCloseClick() {
         this.closePopup();
     }
+
 }
 
 DoorBase.prototype = {
@@ -48,11 +54,32 @@ DoorBase.prototype = {
     unlock: function() {
         this.door.classList.remove('door_locked');
         this.isLocked = false;
+
+        this.showCongratulations();
+
         this.closePopup();
         this.onUnclockCallback();
-        this.showCongratulations();
     },
     showCongratulations: function() {
-        alert('Дверь ' + this.number + ' открыта!')
+        //alert('Дверь ' + this.number + ' открыта!')
+
+        this.popup.querySelector('.popup__congratulations_' + this.number).classList.remove('popup_hidden');
+        this.popup.querySelector('.popup__congratulations__total-time').innerHTML = Math.floor(this.timer / 60) + ' : ' + parseInt(this.timer % 60)
+        this.stopTimer()
+        //console.log(this.timer);
+    },
+    startTimer: function() {
+        var time = new Date();
+
+        this.timerId = setInterval(function () {
+            //console.log(this);
+            this.timer = (new Date() - time) / 1000;
+        }.bind(this), 1000)
+
+        console.log('start', this.timerId);
+    },
+    stopTimer: function() {
+        clearTimeout(this.timerId)
+        //console.log(Math.floor(this.timer / 60) + ': ' + parseInt(this.timer % 60));
     }
 };

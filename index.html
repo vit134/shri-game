@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/app.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Russo+One" rel="stylesheet">
 </head>
 
 <body>
@@ -17,7 +18,7 @@
         <div class="level level_3"><div class="box box_locked door door_disabled door_level_3"></div></div>
         <div class="level level_4"></div>
 
-        <div class="popup popup_level_0">
+        <div class="popup popup_hidden popup_level_0">
             <div class="popup__content popup__content_level_0" touch-action="none">
                 <div class="popup__close">╳</div>
                 <div class="door-counter">
@@ -39,9 +40,17 @@
                         </div>
                     </div>
                 </div>
+                <div class="popup__congratulations popup__congratulations_0 popup_hidden">
+                    <div class="popup__congratulations__title">Поздравляем</div>
+                    <div class="popup__congratulations__text">уровень <span class="popup__congratulations__level popup__congratulations__level_1"></span> пройден</div>
+                    <div class="popup__congratulations__text">
+                        <div>общее время <span class="popup__congratulations__total-time"></span></div>
+                    </div>
+                    <div class="popup__congratulations__button">Дальше</div>
+                </div>
             </div>
         </div>
-        <div class="popup popup_hidden popup_level_1">
+        <div class="popup popup_level_1">
             <div class="ba"></div>
             <div class="popup__content popup__content_level_1" touch-action="none">
                 <div class="popup__close">╳</div>
